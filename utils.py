@@ -1,13 +1,27 @@
+import scipy.integrate
+
+
 def fact(n):
-	"""Computes the factorial of a natural number.
-	
-	Pre: -
-	Post: Returns the factorial of 'n'.
-	Throws: ValueError if n < 0
-	"""
+	a = 1
+	for num in range(2,n +1):
+		a *= num
+	return a
 	pass
 
 def roots(a, b, c):
+	delta = b**2-(4*a*c)
+	if delta == 0:
+		root1 = -b/2*a
+		return root1
+	if delta < 0:
+		delta = delta*-1
+		root1 = (-b+(1j*(delta**(1/2))))/(2*a)
+		root2 = (-b-(1j*(delta**(1/2))))/(2*a)
+		return root1, root2
+	if delta < 0:
+		root1 = (-b+((delta**(1/2))))/(2*a)
+		root2 = (-b-((delta**(1/2))))/(2*a)	
+		return root1, root2
 	"""Computes the roots of the ax^2 + bx + x = 0 polynomial.
 	
 	Pre: -
@@ -17,6 +31,10 @@ def roots(a, b, c):
 	pass
 
 def integrate(function, lower, upper):
+	from scipy.integrate import quad
+	f = lambda x: eval(function)
+	I = quad(f,lower,upper)
+	return I
 	"""Approximates the integral of a fonction between two bounds
 	
 	Pre: 'function' is a valid Python expression with x as a variable,
@@ -35,3 +53,4 @@ if __name__ == '__main__':
 	print(fact(5))
 	print(roots(1, 0, 1))
 	print(integrate('x ** 2 - 1', -1, 1))
+	
