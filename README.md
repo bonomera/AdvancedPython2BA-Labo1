@@ -1,1 +1,1 @@
-First labo of python course
+All the labo of python course
